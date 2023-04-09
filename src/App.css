@@ -112,6 +112,7 @@ nav {
     justify-content: space-between;
     padding: 1rem;
     gap: 15px;
+    margin: 5px;
 }
 
 .task p {
@@ -170,4 +171,7 @@ nav {
 
 .round input[type="checkbox"]:checked+label:after {
     opacity: 1;
+}
+.date{
+    color: rgba(255, 255, 255, 0.481);
 }

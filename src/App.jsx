@@ -29,14 +29,21 @@ const App = () => {
     })
     setTasks(newTasks)
   }
+  const newDate = () => {
+    let date = new Date().toString();
+    date = date.split(" ")
+    date = [date[1], date[2], date[3], date[4]].join(' ')
+    return date
+  }
   const addTask = () => {
     if (input.length > 0) {
       const newTask = {
         id: Date.now(),
         title: input,
-        checked: false
+        checked: false,
+        date: newDate()
       }
-      setTasks([...tasks, newTask])
+      setTasks([newTask, ...tasks])
       setInput('')
     }
     else {
@@ -48,8 +55,8 @@ const App = () => {
     setTasks(newTasks)
   }
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
     if (tasks.length > 0) {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
       setDone(tasks.reduce((acc, task) => {
         if (task.checked) {
           return acc + 1
@@ -118,6 +125,7 @@ const App = () => {
                   <label htmlFor={"checkbox" + task.id}></label>
                 </div>
                 <p className={task.checked ? 'checked' : ''}>{task.title}</p>
+                <p className='date'>{task.date}</p>
                 <i className="bi bi-trash3" onClick={() => deleteTask(task.id)}></i>
               </div>
             )}
